@@ -17,7 +17,7 @@ if (isset($_GET["limit"])){
     $upperLimit = $_GET["limit"];
 }
 
-while (!feof($file) && $counter < $upperLimit) {
+while (!feof($file) && $counter <= $upperLimit) {
     $row = fgets($file);
     $columns = explode(",", $row);
     echo ($counter + 1) . ") " . $columns[0] . " - " . $columns[1]. " - " .$columns[2] . " - " . $columns[3] . $columns[4] . " - " . $columns[5];
