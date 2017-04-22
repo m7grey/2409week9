@@ -7,10 +7,13 @@ $line = fgets($file);
 $counter = 0;
 
 $upperLimit = 100;
+$gte= 0;
 if (isset($_GET["limit"])){
     $upperLimit = $_GET["limit"];
-}
 
+    if (isset($_GET["gte"]))
+    $gte = $_GET["gte"];
+}
 ?>
 
 <!-- saved from url=(0031)file:///C:/bootstrap/table.html -->
@@ -41,8 +44,15 @@ if (isset($_GET["limit"])){
         while (!feof($file) && $counter <= $upperLimit) {
             $row = fgets($file);
             $columns = explode(",", $row);
+            if ($gte <= $columns[4]){
+                $counter++;
+            }
+            else{
+                continue;
+            }
 //            echo ($counter + 1) . ") " . $columns[0] . " - " .$columns[4] . " - " . $columns[3];
-            $counter++;
+// page?limit=10&gte=50
+// page?gte=50
 
        ?>
         <tr>
