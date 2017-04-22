@@ -11,21 +11,11 @@ if (isset($_GET["limit"])){
     $upperLimit = $_GET["limit"];
 }
 
-while (!feof($file) && $counter <= $upperLimit) {
-    $row = fgets($file);
-    $columns = explode(",", $row);
-    echo ($counter + 1) . ") " . $columns[0] . " - " . $columns[1]. " - " .$columns[2] . " - " . $columns[3] . $columns[4] . " - " . $columns[5];
-
-    echo "<hr>";
-    $counter++;
-}
-//close resources
-fclose($file);
 ?>
 
 <!-- saved from url=(0031)file:///C:/bootstrap/table.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Bootstrap Example</title>
+    <title>Customer Report</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./other_files/bootstrap.min.css">
@@ -46,21 +36,26 @@ fclose($file);
         </tr>
         </thead>
         <tbody>
+
+        <?php
+        while (!feof($file) && $counter <= $upperLimit) {
+            $row = fgets($file);
+            $columns = explode(",", $row);
+//            echo ($counter + 1) . ") " . $columns[0] . " - " .$columns[4] . " - " . $columns[3];
+            $counter++;
+
+       ?>
         <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
+            <td><?= $columns[0] ?></td>
+            <td><?= $columns[3] ?></td>
+            <td><?= $columns[4] ?></td>
         </tr>
-        <tr>
-            <td>Mary</td>
-            <td>Moe</td>
-            <td>mary@example.com</td>
-        </tr>
-        <tr>
-            <td>July</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
-        </tr>
+
+        <?php
+        }
+        //close resources
+        fclose($file);
+        ?>
         </tbody>
     </table>
 </div>
